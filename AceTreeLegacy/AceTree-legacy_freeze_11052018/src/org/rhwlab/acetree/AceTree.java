@@ -156,7 +156,7 @@ public class AceTree extends JPanel
 
     private JLabel 	iSeriesLabel;
     private String      iConfigFileName;
-    private JTree       iTree;
+    public JTree       iTree;
 //    private String []   iImgSuffix;
     private Cell        iRoot;
     private JTextPane   iText;

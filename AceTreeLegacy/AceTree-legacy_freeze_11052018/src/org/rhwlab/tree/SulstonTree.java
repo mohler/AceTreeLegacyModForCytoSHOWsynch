@@ -50,13 +50,13 @@ public class SulstonTree extends JFrame implements ActionListener, WindowFocusLi
     private CanonicalTree   iCanonicalTree;
     private JToolBar    iToolBar;
     private JTextField  iRootCell;
-    private JTextField  iLateTimeField;
-    private JTextField  iMinRedField;
-    private JTextField  iMaxRedField;
+    public JTextField  iLateTimeField;
+    public JTextField  iMinRedField;
+    public JTextField  iMaxRedField;
     private JButton     iRefresh;
     private Cell        iCurrentCell;
     private TreeCanvas  iTreeCanvas;
-    private TreePanel   iTreePanel;
+    public TreePanel   iTreePanel;
     private TreePanel   tp;
     private boolean     iCanInterrogate;
     
@@ -184,7 +184,7 @@ public class SulstonTree extends JFrame implements ActionListener, WindowFocusLi
         iTreeCanvas.repaint();
     }
 
-    private void refreshTree() {
+    public void refreshTree() {
         if (iCanInterrogate) {
             iCurrentCell = iAceTree.getCellByName(iRootCell.getText());
             iTreePanel.setCell(iCurrentCell);
