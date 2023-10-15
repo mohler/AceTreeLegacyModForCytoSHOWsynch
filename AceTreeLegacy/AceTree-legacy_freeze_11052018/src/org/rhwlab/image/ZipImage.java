@@ -132,7 +132,7 @@ public class ZipImage {
         FileInfo[] info = null;
         try {
             TiffDecoder td = new TiffDecoder(in, null);
-            info = td.getTiffInfo();
+            info = td.getTiffInfo(0);
         } catch (FileNotFoundException e) {
             IJ.error("TiffDecoder", "File not found: "+e.getMessage());
             return null;
@@ -156,7 +156,7 @@ public class ZipImage {
         FileInfo[] info = null;
         try {
             TiffDecoder td = new TiffDecoder(in, null);
-            info = td.getTiffInfo();
+            info = td.getTiffInfo(0);
         } catch (FileNotFoundException e) {
             IJ.error("TiffDecoder", "File not found: "+e.getMessage());
             return null;
@@ -269,7 +269,7 @@ public class ZipImage {
         FileInfo[] info = null;
         try {
             TiffDecoder td = new TiffDecoder(in, null);
-            info = td.getTiffInfo();
+            info = td.getTiffInfo(0);
         } catch (FileNotFoundException e) {
             IJ.error("TiffDecoder", "File not found: "+e.getMessage());
             return null;

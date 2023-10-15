@@ -31,7 +31,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.IllegalArgumentException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
@@ -50,6 +52,7 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
 import ij.gui.OvalRoi;
+import ij.gui.Roi;
 import ij.io.FileInfo;
 import ij.io.FileOpener;
 import ij.io.Opener;
@@ -563,7 +566,7 @@ public class  ImageWindowAT extends JFrame implements  KeyListener, Runnable {
         FileInfo[] info = null;
         try {
             TiffDecoder td = new TiffDecoder(in, null);
-            info = td.getTiffInfo();
+            info = td.getTiffInfo(0);
         } catch (FileNotFoundException e) {
             IJ.error("TiffDecoder", "File not found: "+e.getMessage());
             return null;
@@ -1191,6 +1194,16 @@ public class  ImageWindowAT extends JFrame implements  KeyListener, Runnable {
 
     public ImagePlus refreshDisplay(ImagePlus imp, String imageName) {
     	this.sourceImp.setPositionWithoutUpdate(2, iImagePlane, iImageTime);
+    	String rbnString = ""+0/*(imp.getChannel()>0?imp.getChannel():1)*/+"_"+(iImagePlane)+"_"+(iImageTime);
+    	Hashtable<String, ArrayList<Roi>> siRMht = this.sourceImp.getRoiManager().getRoisByNumbers();
+    	ArrayList<Roi> siRMzt = this.sourceImp.getRoiManager().getRoisByNumbers().get(rbnString);
+    	for (Roi roi:siRMzt){
+    		String roiName = roi.getName();
+    		String ccName = iAceTree.getCurrentCell().getName();
+    		if (roiName.matches(".*"+ccName+".*")){
+    			this.sourceImp.getRoiManager().select(this.sourceImp.getRoiManager().getListModel().indexOf(roi.getName()));
+    		}
+    	}
     	ImageProcessor iProc = null;
     	if (sourceImp instanceof CompositeImage)
     		iProc = new ColorProcessor(sourceImp.getBufferedImage()); 

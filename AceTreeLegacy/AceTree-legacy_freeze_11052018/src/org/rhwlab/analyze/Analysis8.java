@@ -125,7 +125,7 @@ public class Analysis8 extends Log {
         ImagePlus plusStack2 = createBlankStack("test add");
         computeCrosstalkUsingROI(plusStack2, stack);
         //addStacks(plusStack2, stack);
-        iStackWindow = new StackWindow(plusStack2);
+        iStackWindow = new StackWindow(plusStack2, true);
         //iStackWindow = new StackWindow(stack);
     }
 
@@ -366,8 +366,8 @@ public class Analysis8 extends Log {
         Vector allCircles = makeAllCircles(k);
         processAllCircles(allCircles);
         iStackPlus = new ImagePlus("Stack", iStack);
-        iStackWindow = new StackWindow(iStackPlus);
-        iBlankStackWindow = new StackWindow(iBlankStackPlus);
+        iStackWindow = new StackWindow(iStackPlus, true);
+        iBlankStackWindow = new StackWindow(iBlankStackPlus, true);
         subtractShadows();
         append("new StackWindow: " + iStackWindow);
         System.out.println("new StackWindow: " + iStackWindow);
@@ -404,7 +404,7 @@ public class Analysis8 extends Log {
             }
         }
         //iStackPlus = new ImagePlus("Stack", iStack);
-        iExtraStackWindow = new StackWindow(new ImagePlus("adjusted stack", stack));
+        iExtraStackWindow = new StackWindow(new ImagePlus("adjusted stack", stack), true);
 
     }
 
