@@ -24,6 +24,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 
+import ij.IJ;
+import ij.ImageJ;
+
 import javax.swing.ListModel;
 
 /**
@@ -264,6 +267,12 @@ public class TreePanel extends JPanel {
             //System.out.println("TreeCanvas2.mouseClicked: " + e.getX() + CS + e.getY() + CS + time);
             Cell cs = findIt(e.getX(), e.getY());
             if (cs != null) {
+            	
+//                IJ.wait(100);
+            	Graphics g = getGraphics();
+            	paint(g);
+                g.setColor(Color.black);
+                g.drawOval(e.getX()-10, e.getY()-10, 20, 20);
                 int intTime = (int)(time + 0.5);
                 int button = e.getButton();
                 if (button == MouseEvent.BUTTON1)

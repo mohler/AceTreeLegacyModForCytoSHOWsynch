@@ -1193,10 +1193,24 @@ public class  ImageWindowAT extends JFrame implements  KeyListener, Runnable {
     }
 
     public ImagePlus refreshDisplay(ImagePlus imp, String imageName) {
-    	this.sourceImp.setPositionWithoutUpdate(2, iImagePlane, iImageTime);
-    	String rbnString = ""+0/*(imp.getChannel()>0?imp.getChannel():1)*/+"_"+(iImagePlane)+"_"+(iImageTime);
+    	this.sourceImp.setPositionWithoutUpdate(this.sourceImp.getChannel(), iImagePlane, iImageTime);
+    	String rbnString = (imp.getChannel()>0?imp.getChannel():1)+"_"+(iImagePlane)+"_"+(iImageTime);
     	Hashtable<String, ArrayList<Roi>> siRMht = this.sourceImp.getRoiManager().getRoisByNumbers();
     	ArrayList<Roi> siRMzt = this.sourceImp.getRoiManager().getRoisByNumbers().get(rbnString);
+    	if (siRMzt == null) {
+    		for (int channel = 1;channel<=this.sourceImp.getNChannels();channel++){
+    			rbnString = ""+channel+"_"+(iImagePlane)+"_"+(iImageTime);
+    			siRMzt = this.sourceImp.getRoiManager().getRoisByNumbers().get(rbnString);
+    			if (siRMzt != null)
+    				break;
+    		}
+    	}
+    	if (siRMzt == null) {
+    		rbnString = ""+0+"_"+(iImagePlane)+"_"+(iImageTime);
+    		siRMzt = this.sourceImp.getRoiManager().getRoisByNumbers().get(rbnString);
+    	}
+    	if (siRMzt == null)
+    		return null;
     	for (Roi roi:siRMzt){
     		String roiName = roi.getName();
     		String ccName = iAceTree.getCurrentCell().getName();

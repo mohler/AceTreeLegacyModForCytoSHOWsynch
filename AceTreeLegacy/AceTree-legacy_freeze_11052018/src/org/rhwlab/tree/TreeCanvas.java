@@ -188,6 +188,9 @@ class TreeCanvas extends Canvas {
             double time = (c.getTime() + (e.getY() - Cell.START1)/c.ysc);
             //System.out.println("TreeCanvas2.mouseClicked: " + e.getX() + CS + e.getY() + CS + time);
             Cell cs = findIt(e.getX(), e.getY());
+            Graphics g = getGraphics();
+            g.setColor(Color.black);
+            g.drawOval(e.getX(), e.getY(), 20, 20);
             if (cs != null) {
                 int intTime = (int)(time + 0.5);
                 int button = e.getButton();

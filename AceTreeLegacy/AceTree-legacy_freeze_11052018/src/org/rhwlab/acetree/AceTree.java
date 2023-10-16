@@ -261,7 +261,7 @@ public class AceTree extends JPanel
     private JList				iBookmarkJList;
     private JButton				iAddActiveCell;
     
-    private SulstonTree			iSulstonTree;
+    public SulstonTree			iSulstonTree;
     
     private LinkedList<Integer>	iKeyQueue;
 
