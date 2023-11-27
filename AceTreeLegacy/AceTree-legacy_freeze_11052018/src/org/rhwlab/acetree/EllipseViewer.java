@@ -3,6 +3,7 @@ package org.rhwlab.acetree;
 import ij.ImagePlus;
 import ij.Prefs;
 import ij.gui.ImageCanvas;
+import ij.gui.ImageCanvas2;
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;
 import ij.process.ImageProcessor;
@@ -179,7 +180,7 @@ public class EllipseViewer extends JDialog implements ActionListener {
 		ImageProcessor iproc = iPlus.getProcessor();
 		//makeRoi(iproc);
 		//drawEllipse(iproc);
-		ImageCanvas icanvas = new ImageCanvas(iPlus);
+		ImageCanvas2 icanvas = new ImageCanvas2(iPlus);
 		//icanvas.setMagnification(1.0);
 		//icanvas.zoomIn(10, 10);
 		ij.gui.ImageWindow iwin = new ij.gui.ImageWindow(iPlus, icanvas);
