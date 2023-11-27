@@ -2,7 +2,6 @@ package org.rhwlab.acetree;
 
 import ij.ImagePlus;
 import ij.Prefs;
-import ij.gui.ImageCanvas;
 import ij.gui.ImageCanvas2;
 import ij.gui.PolygonRoi;
 import ij.gui.Roi;

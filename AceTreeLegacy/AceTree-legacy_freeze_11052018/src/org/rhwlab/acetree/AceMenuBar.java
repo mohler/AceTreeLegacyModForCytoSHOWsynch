@@ -718,7 +718,7 @@ public class AceMenuBar extends JMenuBar implements ActionListener, ItemListener
 		} catch (URISyntaxException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}// ij.Main.launch();
+		}
 	    //if image window exists open the current slice
 	    if  (iAceTree.getImageWindowAT()!=null){ 
 		System.out.println("loading image "+iAceTree.getImageWindowAT().getCurrentImageName());
