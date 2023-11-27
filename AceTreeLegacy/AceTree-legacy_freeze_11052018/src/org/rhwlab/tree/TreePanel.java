@@ -271,14 +271,24 @@ public class TreePanel extends JPanel {
 //                IJ.wait(100);
             	Graphics g = getGraphics();
             	paint(g);
-                g.setColor(Color.black);
-                g.drawOval(e.getX()-10, e.getY()-10, 20, 20);
                 int intTime = (int)(time + 0.5);
                 int button = e.getButton();
-                if (button == MouseEvent.BUTTON1)
+                if (button == MouseEvent.BUTTON1){
+                    g.setColor(Color.magenta);
+                    g.drawOval(e.getX()-10, e.getY()-10, 20, 20);
+                   	g.setColor(Color.black);
+                	g.drawString(cs.getName(), e.getX()-10 +6, e.getY()-10-2);
                 	notifyAceTree(cs, intTime);
-                else if (button == MouseEvent.BUTTON3)
+                } else if (button == MouseEvent.BUTTON3) {
+                   	double ratio = cs.getLifeTime()/c.getLifeTime();
+                    g.setColor(Color.magenta);
+                    g.drawOval(e.getX()-10, (int) ((cs.getEndTime()*c.ysc)) - Cell.START1 -3 + Cell.BORDERS, 20, 20);
+                   	g.setColor(Color.black);
+//                    double cH = c.ysc * (c.iLateTime - c.iTimeIndex) + Cell.START1 + Cell.BORDERS;
+//                    cs.ysc = 
+                	g.drawString(cs.getName(), e.getX()+6, (int) ((cs.getEndTime()*c.ysc) - Cell.START1  + Cell.BORDERS +10));
                 	notifyAceTree(cs, cs.getEndTime());
+                }
             }
             iSulstonTree.iAceTree.requestFocus();
         }
