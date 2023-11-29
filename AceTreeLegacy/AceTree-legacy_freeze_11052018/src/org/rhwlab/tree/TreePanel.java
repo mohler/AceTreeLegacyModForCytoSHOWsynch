@@ -36,7 +36,7 @@ import javax.swing.ListModel;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class TreePanel extends JPanel {
-    Cell        c;
+    public Cell        c;
     int         width;
     int         height;
     SulstonTree iSulstonTree;
@@ -221,26 +221,43 @@ public class TreePanel extends JPanel {
         Cell cs = null;
         double timex = (c.getTime() + (y - Cell.START1)/c.ysc);
         int time = (int)(timex + 0.5);
-        //System.out.println("findIt: " + c + CS + time + CS + Cell.START1 + CS + c.yStartUse);
+
         while (ev.hasMoreElements()) {
             Cell c = (Cell)ev.nextElement();
-            //System.out.println(c + CS + c.getTime() + CS + c.getEndTime());
-            int cystart = c.yStartUse;
-            int cyend = cystart + (int)((c.getEndTime() - c.getTime() + 1) * this.c.ysc + 0.5);
-            //System.out.println(c + CS + cystart + CS + cyend);
-            //if (y < cystart || y > cyend) continue;
+
             if (time < c.getTime() || time > c.getEndTime()) continue;
-            //System.out.println("candidate: " + c);
+
             int xtest = Math.abs(x - c.xUse);
             if (xtest < xs && xtest < Cell.xsc) {
                 xs = xtest;
                 cs = c;
             }
         }
-        //int time = 0;
-        //if (cs != null) time = c.getTime() + (int)((y - c.yStartUse)/this.c.ysc);
-        //System.out.println("selected " + cs + " at " + time);
         return cs;
+    }
+
+    @SuppressWarnings("unused")
+	public int[] cellTreeLocation(String name, int time) {
+        Enumeration ev = iCellXHash.elements();
+
+        int cellTreeX = 0;
+		int cellTreeY = 0;
+        while (ev.hasMoreElements()) {
+            Cell c = (Cell)ev.nextElement();
+            String cName = c.getName();
+            if (cName.equals(name)){
+            	int cystart = c.getTime();
+            	int cyend = c.getEndTime();
+            	int cyNow = (int)((time + 1));
+
+            	if (time < c.getTime() || time > c.getEndTime()) continue;
+
+            	cellTreeX = c.xUse;
+            	cellTreeY = cyNow;
+            }
+        }
+
+        return new int[]{cellTreeX, cellTreeY};
     }
 
     public void notifyAceTree(Cell c, int time) {
@@ -270,7 +287,7 @@ public class TreePanel extends JPanel {
             	
 //                IJ.wait(100);
             	Graphics g = getGraphics();
-            	paint(g);
+//            	paint(g);
                 int intTime = (int)(time + 0.5);
                 int button = e.getButton();
                 if (button == MouseEvent.BUTTON1){
@@ -280,14 +297,14 @@ public class TreePanel extends JPanel {
                 	g.drawString(cs.getName(), e.getX()-10 +6, e.getY()-10-2);
                 	notifyAceTree(cs, intTime);
                 } else if (button == MouseEvent.BUTTON3) {
-                   	double ratio = cs.getLifeTime()/c.getLifeTime();
                     g.setColor(Color.magenta);
-                    g.drawOval(e.getX()-10, (int) ((cs.getEndTime()*c.ysc)) - Cell.START1 -3 + Cell.BORDERS, 20, 20);
+                    int csEnd = cs.getEndTime();
+                    double ypad = 20*100/iSulstonTree.getHeight();
+                    IJ.log("c.ysc= "+c.yscRaw+" ypad= "+ ypad);
+                    g.drawOval(e.getX()-10, (int) (((csEnd +Cell.START1 +Cell.START0)*c.ysc) + ypad), 20, 20);
                    	g.setColor(Color.black);
-//                    double cH = c.ysc * (c.iLateTime - c.iTimeIndex) + Cell.START1 + Cell.BORDERS;
-//                    cs.ysc = 
-                	g.drawString(cs.getName(), e.getX()+6, (int) ((cs.getEndTime()*c.ysc) - Cell.START1  + Cell.BORDERS +10));
-                	notifyAceTree(cs, cs.getEndTime());
+                	g.drawString(cs.getName(), e.getX()+6, (int) ((csEnd +Cell.START1 +Cell.START0)*c.ysc + ypad));
+                 	notifyAceTree(cs, cs.getEndTime());
                 }
             }
             iSulstonTree.iAceTree.requestFocus();

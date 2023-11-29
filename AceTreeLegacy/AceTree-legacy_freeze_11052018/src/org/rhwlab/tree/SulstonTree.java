@@ -325,7 +325,7 @@ public class SulstonTree extends JFrame implements ActionListener, WindowFocusLi
      */
     @Override
 	public void windowGainedFocus(WindowEvent e) {
-        refreshTree();
+//        refreshTree();
     }
     
     /* (non-Javadoc)

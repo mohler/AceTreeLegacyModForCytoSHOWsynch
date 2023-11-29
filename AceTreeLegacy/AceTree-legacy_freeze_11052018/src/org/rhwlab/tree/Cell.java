@@ -52,6 +52,7 @@ public class Cell extends DefaultMutableTreeNode {
 
     // drawing related variables and static functions
     public double ysc;
+    public double yscRaw;
     public int yStartUse;
     public int xUse;
     private int iXmax;
@@ -241,6 +242,7 @@ public class Cell extends DefaultMutableTreeNode {
         //height = 800;
         //System.out.println("draw cHeight=" + cHeight);
         ysc = (h - START1 - BORDERS)/height; //*(cHeight-100)/600;
+        yscRaw = (h)/height; //*(cHeight-100)/600;
         iXmax = xsc;
         yStartUse = START1;
         
